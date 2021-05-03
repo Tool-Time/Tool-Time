@@ -18,6 +18,4 @@ const userSchema = new mongoose.Schema({
   tools: [toolSchema]
 })
 
-const UserModel = new mongoose.model('User', userSchema);
-
-exports.User = UserModel;
+exports.exports = mongoose.model('User', userSchema);
