@@ -1,0 +1,29 @@
+{
+  "name": "Tool-Time",
+  "version": "1.0.0",
+  "description": "## Authors: Dion Johnson, Michael Campbell, Rinat Galeev, Cullen Sharp",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tool-Time/Tool-Time.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tool-Time/Tool-Time/issues"
+  },
+  "homepage": "https://github.com/Tool-Time/Tool-Time#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.12.7",
+    "nodemon": "^2.0.7"
+  }
+}

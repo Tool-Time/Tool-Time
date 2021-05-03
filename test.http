@@ -1,0 +1,18 @@
+GET http://localhost:3001/users HTTP/1.1
+Content-Type: application/json
+
+###
+
+
+POST http://localhost:3001/users/60906e5d5e3ebe0382f44ffd HTTP/1.1
+Content-Type: application/json
+
+{
+  "tools": [{
+    "name": "roto-zip",
+    "category": "Demolition",
+    "owner": "Cullen Sharp",
+    "borrowedBy": "",
+    "Availbility": true
+  }] 
+}
