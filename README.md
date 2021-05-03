@@ -114,12 +114,44 @@ As a user I want the ability to loan or borrow tools
 
 As a user I want search tools by category, so that I'm shown only tools relevant to my search.
 
-#### Feature tasks
+#### **Feature tasks**
 
 - All tools should include category as part of their model
 
 - Enable search functionality
 
-#### Acceptance tests
+#### **Acceptance tests**
 
 - Only a list of tools associated with the search category should be shown.
+
+## Domain modelling
+
+User contains:
+
+- Name (String)
+
+- email (String)
+
+- latitude (Number)
+
+- longitude (Number)
+
+- tool list (Array)
+
+- Rating (Number)
+
+Each tool contains:
+
+- Tool name (String)
+
+- Owner (String)
+
+- Borrower (String)
+
+- Whether or not it's borrowed (Boolean)
+
+- Category to tool (String)
+
+## Entity relationship diagram
+
+![Entity Relationship Diagram](ER-Diagram.png)
