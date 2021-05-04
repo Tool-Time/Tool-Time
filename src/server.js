@@ -14,7 +14,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost/tools', {useNewUrlParser: true, useUnifiedTopology: true});
+const mongodbURI = process.env.MONGODB_URI;
+mongoose.connect(mongodbURI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 
 
