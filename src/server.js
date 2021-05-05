@@ -23,10 +23,12 @@ db.once('open', () => {console.log('Mongoose is connected')});
 //Routes//
 app.get('/', data.getAllUsers);
 app.get('/users', data.getTools);
-app.delete('/users/:id', data.deleteTool);
-app.post('/users/:id', data.addTool);
+app.get('/user/:id', data.getOneUser);
 app.put('/borrow/:id', data.borrowTool);
 // app.put();
+app.post('/users/:id', data.addTool);
+app.delete('/users/:id', data.deleteTool);
+
 
 
 app.listen(PORT, () => {console.log(`Getting jiggy with it at ${PORT}.`);})
