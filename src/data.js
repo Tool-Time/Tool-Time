@@ -103,5 +103,18 @@ data.getOneUser = async (req, res) => {
   }
 }
 
-// data.modifyMyTools = async ()
+data.modifyMyTools = async (req, res) => {
+  const _id = req.params.id;
+  // const {toolID}
+
+  try{
+    const user = await User.findById({_id});
+    if(!user) console.log('user not found');
+
+    const myTools = user.tools;
+  } catch (err) {
+    res.status(400).json({message: err.message});
+  }
+}
+
 module.exports = data;
