@@ -91,4 +91,17 @@ data.borrowTool = async (req, res) => {
   }
 }
 
+data.getOneUser = async (req, res) => {
+  const _id = req.params.id;
+  try{
+    const user = await User.findById({_id});
+    if(!user) console.log('user not found');
+
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(400).json({message: err.message});
+  }
+}
+
+// data.modifyMyTools = async ()
 module.exports = data;
