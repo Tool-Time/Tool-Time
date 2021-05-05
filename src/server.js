@@ -25,7 +25,7 @@ app.get('/', data.getAllUsers);
 app.get('/users', data.getTools);
 app.delete('/users/:id', data.deleteTool);
 app.post('/users/:id', data.addTool);
-// app.put('/users/:id', data.change);
+app.put('/users/:id', data.modifyTool);
 
 
 app.listen(PORT, () => {console.log(`Getting jiggy with it at ${PORT}.`);})
