@@ -12,6 +12,22 @@ data.getAllUsers = async (req, res) => {
   }
 }
 
+data.getTools = async (req, res) => {
+  const category = req.query.category;
+
+  try {
+    const users = await User.find();
+    const filteredUsers = users.filter(
+      user => user.tools.reduce((acc, cur) => cur.category === category ? acc = true : acc ,false)
+    );
+    console.log(users[0].tools);
+    res.status(200).json(filteredUsers);
+  } catch (err) {
+    res.status(500).json({message: err.message});
+  }
+}
+
+
 data.addTool = async (req, res) => {
   const _id = req.params.id;
   const {tools} = req.body;
