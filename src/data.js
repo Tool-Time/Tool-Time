@@ -49,13 +49,14 @@ data.addTool = async (req, res) => {
 
 data.deleteTool = async (req, res) => {
   const _id = req.params.id;
-  console.log({_id});
+  const {toolID} = req.body;
+  console.log({_id},{toolID});
   try{
+    const user = await User.findById({_id});
+    user.tools.splice(toolID, 1);
+    user.save();
     
-    await Promise.all([(User.find({_id})),(User.deleteOne({_id}))]);
-   
-
-    res.status(200).json('Did it');
+    res.status(200).json(user);
   } catch (err) {
     res.status(500).json({message: err.message});
   }
