@@ -6,7 +6,6 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const mongoose = require('mongoose');
-const User = require('../models/user-model');
 const PORT = process.env.PORT || 3002;
 const data = require('./data');
 
@@ -17,16 +16,16 @@ app.use(express.json());
 const mongodbURI = process.env.MONGODB_URI;
 mongoose.connect(mongodbURI, {useNewUrlParser: true, useUnifiedTopology: true});
 
-
-
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {console.log('Mongoose is connected')});
 
 //Routes//
+app.get('/', data.getAllUsers);
+app.get('/users', data.getTools);
 app.delete('/users/:id', data.deleteTool);
-app.get('/users', data.getAllUsers);
-
 app.post('/users/:id', data.addTool);
+// app.put('/users/:id', data.change);
+
 
 app.listen(PORT, () => {console.log(`Getting jiggy with it at ${PORT}.`);})
