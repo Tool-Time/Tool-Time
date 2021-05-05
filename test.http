@@ -26,5 +26,15 @@ DELETE http://localhost:3001/users/6091b5565e327a1bb0628cb4 HTTP/1.1
 Content-Type: application/json
 
 {
-  "toolID":0
+  "toolID":0,
+}
+
+###
+PUT http://localhost:3001/users/6091b5565e327a1bb0628cb2 HTTP/1.1
+Content-Type: application/json
+
+{
+  "toolID":0,
+  "borrowedBy": "Michael Campbell", 
+  "Availbility": false
 }
