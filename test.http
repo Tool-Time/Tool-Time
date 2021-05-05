@@ -43,3 +43,12 @@ Content-Type: application/json
   "toolID":0,
   "Availbility": false
 }
+
+###
+PUT http://localhost:3001/user/6091b5565e327a1bb0628cb0 HTTP/1.1
+Content-Type: application/json
+
+{
+  "toolID": 0
+  
+}
