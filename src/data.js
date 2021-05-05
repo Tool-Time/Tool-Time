@@ -55,12 +55,31 @@ data.deleteTool = async (req, res) => {
     const user = await User.findById({_id});
     user.tools.splice(toolID, 1);
     user.save();
-    
+
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({message: err.message});
   }
 }
 
+data.modifyTool = async (req, res) => {
+  const _id = req.params.id;
+  const {toolID, borrowedBy, Availbility} = req.body;
+  try{
+    const user = await User.findById({_id});
+    if(!user) console.log('no user found');
+
+    const currentTool = user.tools.slice(toolID, toolID+1);
+    currentTool[0].borrowedBy = borrowedBy;
+    currentTool[0].Availbility = Availbility;
+
+    user.tools[toolID] = currentTool[0];
+    user.save();
+
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(400).json({message: err.message});
+  }
+}
 
 module.exports = data;
