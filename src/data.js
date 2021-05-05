@@ -49,17 +49,72 @@ data.addTool = async (req, res) => {
 
 data.deleteTool = async (req, res) => {
   const _id = req.params.id;
-  console.log({_id});
+  const {toolID} = req.body;
+  console.log({_id},{toolID});
   try{
-    
-    await Promise.all([(User.find({_id})),(User.deleteOne({_id}))]);
-   
+    const user = await User.findById({_id});
+    user.tools.splice(toolID, 1);
+    user.save();
 
-    res.status(200).json('Did it');
+    res.status(200).json(user);
   } catch (err) {
     res.status(500).json({message: err.message});
   }
 }
 
+data.borrowTool = async (req, res) => {
+  const _id = req.params.id;
+  const {
+    borrowerID,
+    toolID,
+    Availbility } = req.body;
+  try{
+    const owner = await User.findById({_id});
+    if(!owner) console.log('no owner found');
+
+    const borrower = await User.findById({_id: borrowerID});
+    if(!borrower) console.log('no borrower found');
+
+    const currentTool = owner.tools.slice(toolID, toolID+1);
+    currentTool[0].borrowedBy = borrower.name;
+    currentTool[0].Availbility = Availbility;
+
+    owner.tools[toolID] = currentTool[0];
+    owner.save();
+
+    borrower.tools.push(currentTool[0]);
+    borrower.save();
+
+    res.status(200).json(borrower);
+  } catch (err) {
+    res.status(400).json({message: err.message});
+  }
+}
+
+data.getOneUser = async (req, res) => {
+  const _id = req.params.id;
+  try{
+    const user = await User.findById({_id});
+    if(!user) console.log('user not found');
+
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(400).json({message: err.message});
+  }
+}
+
+data.modifyMyTools = async (req, res) => {
+  const _id = req.params.id;
+  // const {toolID}
+
+  try{
+    const user = await User.findById({_id});
+    if(!user) console.log('user not found');
+
+    const myTools = user.tools;
+  } catch (err) {
+    res.status(400).json({message: err.message});
+  }
+}
 
 module.exports = data;
