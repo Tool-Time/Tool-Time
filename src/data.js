@@ -62,21 +62,30 @@ data.deleteTool = async (req, res) => {
   }
 }
 
-data.modifyTool = async (req, res) => {
+data.borrowTool = async (req, res) => {
   const _id = req.params.id;
-  const {toolID, borrowedBy, Availbility} = req.body;
+  const {
+    borrowerID,
+    toolID,
+    Availbility } = req.body;
   try{
-    const user = await User.findById({_id});
-    if(!user) console.log('no user found');
+    const owner = await User.findById({_id});
+    if(!owner) console.log('no owner found');
 
-    const currentTool = user.tools.slice(toolID, toolID+1);
-    currentTool[0].borrowedBy = borrowedBy;
+    const borrower = await User.findById({_id: borrowerID});
+    if(!borrower) console.log('no borrower found');
+
+    const currentTool = owner.tools.slice(toolID, toolID+1);
+    currentTool[0].borrowedBy = borrower.name;
     currentTool[0].Availbility = Availbility;
 
-    user.tools[toolID] = currentTool[0];
-    user.save();
+    owner.tools[toolID] = currentTool[0];
+    owner.save();
 
-    res.status(200).json(user);
+    borrower.tools.push(currentTool[0]);
+    borrower.save();
+
+    res.status(200).json(borrower);
   } catch (err) {
     res.status(400).json({message: err.message});
   }
