@@ -24,11 +24,9 @@ db.once('open', () => {console.log('Mongoose is connected')});
 app.get('/', data.getAllUsers);
 app.get('/users', data.getTools);
 app.get('/user/:id', data.getOneUser);
-app.put('/borrow/:id', data.borrowTool);
+// app.put('/borrow/:id', data.borrowTool);
 // app.put('/user/:id', data.modifyMyTools);
 app.post('/users/:id', data.addTool);
 app.delete('/users/:id', data.deleteTool);
-
-
 
 app.listen(PORT, () => {console.log(`Getting jiggy with it at ${PORT}.`);})
