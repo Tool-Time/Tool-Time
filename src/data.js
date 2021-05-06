@@ -17,10 +17,11 @@ data.getTools = async (req, res) => {
 
   try {
     const users = await User.find();
-    const filteredUsers = users.filter(
-      user => user.tools.reduce((acc, cur) => cur.category === category ? acc = true : acc ,false)
-    );
-    console.log(users[0].tools);
+    const filteredUsers = users.filter(user => {
+      let temp = user.tools.filter(tool => tool.category === category);
+      return temp.length > 0;
+    });
+    
     res.status(200).json(filteredUsers);
   } catch (err) {
     res.status(500).json({message: err.message});
@@ -105,16 +106,37 @@ data.getOneUser = async (req, res) => {
 
 data.modifyMyTools = async (req, res) => {
   const _id = req.params.id;
-  // const {toolID}
+  const {toolID, name, category, borrowedBy, Availbility} = req.body;
 
   try{
     const user = await User.findById({_id});
     if(!user) console.log('user not found');
 
-    const myTools = user.tools;
+    const newTool = {
+      name,
+      category,
+      owner: user.name,
+      borrowedBy,
+      Availbility
+    }
+
+    user.tools.splice(toolID, 1, newTool);
+    user.save();
+
+    res.status(200).json(user);
   } catch (err) {
     res.status(400).json({message: err.message});
   }
 }
+
+// data.returnTool = async (req, res) => {
+//   const _id = req.params.id;
+//   const {toolID} = req.body;
+
+//   try {
+//     const user = await User.findById({_id});
+
+//   }
+// }
 
 module.exports = data;
