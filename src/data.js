@@ -67,8 +67,7 @@ data.borrowTool = async (req, res) => {
   const _id = req.params.id;
   const {
     borrowerID,
-    toolID,
-    Availbility } = req.body;
+    toolID } = req.body;
   try{
     const owner = await User.findById({_id});
     if(!owner) console.log('no owner found');
@@ -78,7 +77,7 @@ data.borrowTool = async (req, res) => {
 
     const currentTool = owner.tools.slice(toolID, toolID+1);
     currentTool[0].borrowedBy = borrower.name;
-    currentTool[0].Availbility = Availbility;
+    currentTool[0].Availbility = !currentTool[0].Availbility;
 
     owner.tools[toolID] = currentTool[0];
     owner.save();
@@ -128,15 +127,5 @@ data.modifyMyTools = async (req, res) => {
     res.status(400).json({message: err.message});
   }
 }
-
-// data.returnTool = async (req, res) => {
-//   const _id = req.params.id;
-//   const {toolID} = req.body;
-
-//   try {
-//     const user = await User.findById({_id});
-
-//   }
-// }
 
 module.exports = data;

@@ -8,6 +8,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3002;
 const data = require('./data');
+const User = require('../models/user-model');
 
 const app = express();
 app.use(cors());
